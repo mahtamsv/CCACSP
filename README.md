@@ -2,7 +2,7 @@
 
 This is an implementation of the canonical correlation approach to common spatial patterns (CCACSP) algorithm proposed by Eunho Noh and Virginia de Sa. "Canonical correlation approach to common spatial patterns." 2013 6th International IEEE/EMBS Conference on Neural Engineering (NER). IEEE, 2013.
 
-This code provides a set of filters with the goal of improving discriminability in binary motor imagery brain-computer interfaces (MI-BCI). Aside from learning the CCACSP filters, this code also provides functions to perform classification. 
+This code provides a set of filters with the goal of improving discriminability in motor imagery brain-computer interfaces (MI-BCI). Aside from learning the CCACSP filters, this code also provides functions to perform classification. 
 
 ## How to use
 
