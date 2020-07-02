@@ -1,6 +1,5 @@
 import numpy as np 
 import sklearn.discriminant_analysis as sklda
-import scipy.io as sio
 import scipy as sp 
 
 def train(train_data_1, train_data_2, numFilt):
@@ -18,6 +17,7 @@ def train(train_data_1, train_data_2, numFilt):
     train_filt_2 = apply_CCACSP(train_data_2, ccacsp_filts, numFilt)
     train_logP_2  = np.squeeze(np.log(np.var(train_filt_2, axis=2)))
 
+    # define the classifier
     clf = sklda.LinearDiscriminantAnalysis(solver='lsqr', shrinkage='auto')
     
     X = np.concatenate((train_logP_1, train_logP_2), axis=0)
@@ -26,6 +26,7 @@ def train(train_data_1, train_data_2, numFilt):
     y2 = np.ones(numTrials_2)
     y = np.concatenate((y1, y2))
 
+    # train the classifier 
     clf.fit(X, y)
 
     return ccacsp_filts, clf
