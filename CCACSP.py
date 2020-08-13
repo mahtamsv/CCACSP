@@ -149,7 +149,7 @@ def apply_CCACSP(X, f, col_num):
 
 def my_cov(X, Y):
 	avg_X = np.mean(X, axis=1)
-	avg_Y = np.mean(X, axis=1)
+	avg_Y = np.mean(Y, axis=1)
 
 	X = X - avg_X[:,None]
 	Y = Y - avg_Y[:,None]
