@@ -68,11 +68,8 @@ def calc_CCACSP(x1,x2, numFilt):
         Samp = x1[ik]
         temp1 = 0.5*(Samp[:,range0]+Samp[:,range2])
         temp2 = Samp[:,range1]
-	
-	temp3 = np.cov(temp2, temp1)
-        temp3 = temp3[n_chans:2*n_chans,0:n_chans]
 
-        c1_shifted = c1_shifted+ temp3/np.trace(temp3)
+        c1_shifted = c1_shifted+ my_cov(temp2, temp1)/np.trace(my_cov(temp2, temp1))
         c1 = c1+np.cov(x1[ik])/np.trace(np.cov(x1[ik]))
 
     c1_shifted = np.divide(c1_shifted,num_trials_1)
@@ -83,10 +80,7 @@ def calc_CCACSP(x1,x2, numFilt):
         temp1 = 0.5*(Samp[:,range0]+Samp[:,range2])
         temp2 = Samp[:,range1]
 	
-        temp3 = np.cov(temp2, temp1)
-        temp3 = temp3[n_chans:2*n_chans,0:n_chans]
-
-        c2_shifted = c2_shifted+ temp3/np.trace(temp3)
+        c2_shifted = c2_shifted+ my_cov(temp2, temp1)/np.trace(my_cov(temp2, temp1))
         c2 = c2+np.cov(x2[ik])/np.trace(np.cov(x2[ik]))
 
     c2_shifted = np.divide(c2_shifted,num_trials_2)
@@ -153,3 +147,11 @@ def apply_CCACSP(X, f, col_num):
 
     return dat
 
+def my_cov(X, Y):
+	avg_X = np.mean(X, axis=1)
+	avg_Y = np.mean(Y, axis=1)
+
+	X = X - avg_X[:,None]
+	Y = Y - avg_Y[:,None]
+
+	return np.matmul(X, Y.transpose())
